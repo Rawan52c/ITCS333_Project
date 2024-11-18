@@ -1,0 +1,142 @@
+
+body {
+    font-family: '', sans-serif;
+    background-color: #f6f4f9;  
+    color: #333333;  
+    line-height: 1.5;
+    padding: 10px;
+    margin: 0;
+}
+
+.container {
+    max-width: 400px;  
+    margin: 0 auto;
+    padding: 30px;
+    background-color: #fff; 
+    box-shadow: 0 1px 10px rgba(0, 0, 0, 0.1); 
+    border-radius: 10px; 
+}
+
+h1 {
+    text-align: center;
+    color: #000304;  
+    font-size: 25px;  
+}
+
+h2 {
+    color: #000304;
+    font-size: 20px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.alert {
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 5px;
+}
+
+.alert-danger {
+    background-color: #168e94;
+    border-color: #141286;
+    color: #d01225;
+}
+
+.alert-success {
+    background-color: #fff;
+    border-color: #000304;
+    color: #e50f24;
+}
+
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; 
+}
+
+label {
+    font-size: 20px;
+    color: #334444;
+    font-weight: strong;
+}
+
+input[type="email"],
+input[type="password"] {
+    padding: 10px;
+    border: 1px solid #1d0c64;
+    border-radius: 4px;
+    font-size: 18px;
+    width: 100%;
+}
+
+input[type="email"]:focus,
+input[type="password"]:focus {
+    outline: none;
+    border-color: #3b22b8;  
+}
+
+button[type="submit"] {
+    padding: 12px;
+    font-size: 18px;
+    background-color: #fff; 
+    color: white;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    
+}
+
+button[type="submit"]:hover {
+    background-color: #ca1010; 
+}
+
+
+form button {
+    margin-top: 10px;
+}
+
+
+@media screen and (max-width: 700px) {
+    .container {
+        width: 90%; 
+    }
+    
+    h1, h2 {
+        font-size: 25px; 
+    }
+    
+    input[type="email"],
+    input[type="password"],
+    button[type="submit"] {
+        font-size: 18px; 
+    }
+
+    .alert {
+        font-size: 18px; 
+    }
+}
+
+
+@media screen and (min-width: 1200px) {
+    .container {
+        width: 60%; 
+    }
+
+    h1 {
+        font-size: 40px; 
+    }
+
+    h2 {
+        font-size: 32px;
+    }
+}
+
+a {
+    color: #1ea2bf; 
+    text-decoration: ;
+}
+
+a:hover {
+    text-decoration: underline;
+}
