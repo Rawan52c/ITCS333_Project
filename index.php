@@ -7,7 +7,6 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
-
 $username = $_SESSION['username'];
 $user_position = $_SESSION['user_position'];
 ?>
@@ -22,11 +21,9 @@ $user_position = $_SESSION['user_position'];
 </head>
 <body>
     <div class="container">
-        <h1>Welcome, <?php echo htmlspecialchars($user_name); ?>!</h1>
-        <p>Your role: <?php echo htmlspecialchars($user_position); ?></p>
+        <h1>Welcome, <?php echo htmlspecialchars($username); ?>!</h1> 
+        <p>Your role: <?php echo htmlspecialchars($user_position); ?></p>  
 
-    
-        
         <a href="logout.php">Logout</a>
     </div>
 </body>
