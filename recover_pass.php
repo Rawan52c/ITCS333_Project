@@ -38,38 +38,4 @@ if (isset($_GET['token'])) {
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Password Recovery</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/picocss/pico.min.css">
-</head>
-<body>
-    <div class="container">
-        <h1><strong>Password Recovery</strong></h1>
 
-        <?php if (isset($error)): ?>
-            <div class="alert alert-danger"><?php echo htmlspecialchars($error); ?></div>
-        <?php endif; ?>
-        <?php if (isset($success)): ?>
-            <div class="alert alert-success"><?php echo $success; ?></div>
-        <?php endif; ?>
-
-        <?php if (isset($user) && !isset($success)): ?>
-           <form action="recover_pass.php?token=<?php echo htmlspecialchars($token); ?>" method="post">
-                <label for="new_password">New Password</label>
-                <input type="password" id="new_password" name="new_password" required>
-
-                <label for="pass_confirmation">Confirm Your New Password</label>
-                <input type="password" id="pass_confirmation" name="pass_confirmation" required>
-
-                <button type="submit">Recover Password!</button>
-            </form>
-        <?php endif; ?>
-
-    </div>
-
-</body>
-</html>
