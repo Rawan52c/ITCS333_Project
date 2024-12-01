@@ -9,6 +9,7 @@
 <body>
     <div class="ProfileContainer">
         <div class="ProfileImage"></div>
+        <form method="post" action="">
         <div class="UserDetails">
             <div>
                 <div class="ProfileFirstName"> 
@@ -21,6 +22,32 @@
                     <input type ="text">
                 </div>
             </div>
+            <div class="ProfileEmail"> 
+                    <label > Email </label>
+                    <input type ="email">
+
+                </div>
+                <div class="ProfileID"> 
+                    <label > ID </label>
+                    <input type ="number">
+
+                </div>
+                <div>
+                <div class="ProfileDepartment"> 
+                    <label > Department </label>
+                    <input type ="text">
+
+                </div>
+                <div class="ProfileMajor">
+                    <label > Major </label>
+                    <input type ="text">
+                </div>
+            </div>
+            <div class="ProfilePhoneNumber">
+                    <label > Phone Number </label>
+                    <input type ="text">
+                </div>
+            </form>
         </div>
         
     </div>
