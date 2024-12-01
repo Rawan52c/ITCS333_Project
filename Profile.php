@@ -47,6 +47,7 @@
                     <label > Phone Number </label>
                     <input type ="text">
                 </div>
+                <button type="submit"> Save </button>
             </form>
         </div>
         
