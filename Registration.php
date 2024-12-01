@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $pass_confirmation = $_POST['pass_confirmation'];     
     $user_position = htmlspecialchars(trim($_POST['user_position']));           
 
-    // Email Validation      
+        
     if (!filter_var($email, FILTER_VALIDATE_EMAIL) || !preg_match('/@uob\.edu\.bh$/', $email)) {         
         $error = "Failed to Validate your email. Try Again, using your University of Bahrain (UOB) Email Address";      
     } elseif ($password !== $pass_confirmation) {         
