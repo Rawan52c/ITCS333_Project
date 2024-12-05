@@ -7,46 +7,36 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/picocss/pico.min.css">
 </head>
 <body>
+    <?php 
+    echo($_SESSION['user_id']);
+    $userID =  $_SESSION['user_id'];
+    $userName = $_SESSION['user_name'] ;
+    $userEmail = $_SESSION['email'] ;
+    $userPostion = $_SESSION['user_position'] ;
+    $ID = explode("@", $userEmail);
+    ?>
     <div class="ProfileContainer">
         <div class="ProfileImage"></div>
         <form method="post" action="">
         <div class="UserDetails">
-            <div>
-                <div class="ProfileFirstName"> 
-                    <label > First Name </label>
-                    <input type ="text">
+          
+                <div class="UserName"> 
+                    <label > User Name </label>
+                    <input type ="text" value="<?php echo($userName)?>">
 
                 </div>
-                <div class="ProfileLastName">
-                    <label > Last Name </label>
-                    <input type ="text">
-                </div>
-            </div>
+               
             <div class="ProfileEmail"> 
                     <label > Email </label>
-                    <input type ="email">
+                    <input type ="email" value="<?php echo($userEmail)?>" >
 
                 </div>
                 <div class="ProfileID"> 
                     <label > ID </label>
-                    <input type ="number">
+                    <input type ="number" value="<?php echo($userID[0])?>">
 
                 </div>
-                <div>
-                <div class="ProfileDepartment"> 
-                    <label > Department </label>
-                    <input type ="text">
 
-                </div>
-                <div class="ProfileMajor">
-                    <label > Major </label>
-                    <input type ="text">
-                </div>
-            </div>
-            <div class="ProfilePhoneNumber">
-                    <label > Phone Number </label>
-                    <input type ="text">
-                </div>
                 <button type="submit"> Save </button>
             </form>
         </div>
