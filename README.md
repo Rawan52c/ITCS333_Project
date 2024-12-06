@@ -1,2 +1,2 @@
-# itcs333-project
-Repository for ITCS333 Project Purposes.
+# ITCS333 Course Project 
+Repository for ITCS333 Project: Responsive Web-Based IT College Room Booking System.
