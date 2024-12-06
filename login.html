@@ -15,13 +15,17 @@
         <?php endif; ?>
 
         <form action="login.php" method="post">
+            <div>
             <label for="email"> Email </label>
-            <input type="email" id="email" name="email" required>
-
+            <input type="email" id="email" name="email" required placeholder="Make sure it is your uob email">
+            </div>
+            
+            <div>
             <label for="password"> Password </label>
-            <input type="password" id="password" name="password" required>
-
-            <button type="submit"> Login </button>
+            <input type="password" id="password" name="password" minlength="12" maxlength="16" required>
+            </div>
+            
+            <input type="submit" value= "Login">
         </form>
 
         <p> If you are a new user: <a href="registration.php"> Register Now! </a>.</p>
