@@ -15,6 +15,7 @@ if (isset($_GET['room_id'])) {
         die("Room not found.");
     }
 
+
     // Handle form submission for booking
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $startTime = $_POST['start_time'];
