@@ -4,7 +4,7 @@ require 'core.php';
 $search = $_GET['search'] ?? ''; //Get the search term, default to an empty string.
 
 // Fetch rooms based on the search term
-if(!empty($search)){
+if (!empty($search)) {
     $rooms = fetchAll("SELECT * FROM rooms WHERE name LIKE ?", ['%' . $search . '%']);
 } else {
     $rooms = fetchAll("SELECT * FROM rooms");
@@ -13,31 +13,25 @@ if(!empty($search)){
 // Fetch bookings for rooms
 $roomAvailability = [];
 foreach ($rooms as $room) {
-
-    // Get all reservations for the current room
     $reservations = fetchAll(
-        "SELECT * FROM reservations WHERE room_id = ? AND status = 'confirmed' ORDER BY start_time", 
+        "SELECT * FROM reservations WHERE room_id = ? AND status = 'confirmed' ORDER BY start_time",
         [$room['id']]
     );
-    
-    // Check if the room is available
+
     if (empty($reservations)) {
-        $roomAvailability[$room['id']] = 'Available';  // Room is not booked
+        $roomAvailability[$room['id']] = 'Available';
     } else {
-        // Find the next available time slot
         $nextAvailable = null;
         $now = new DateTime();
-        
-        // Find the next available slot after the last booking
+
         foreach ($reservations as $reservation) {
             $endTime = new DateTime($reservation['end_time']);
             if ($endTime > $now) {
                 $nextAvailable = $endTime->format('Y-m-d H:i');
-                break; // We found the next available time
+                break;
             }
         }
 
-        // If there is no upcoming booking, the room is available
         if (!$nextAvailable) {
             $roomAvailability[$room['id']] = 'Available';
         } else {
@@ -46,7 +40,6 @@ foreach ($rooms as $room) {
     }
 }
 
-// Handle no results
 if (empty($rooms)) {
     $noResults = "No rooms found.";
 }
@@ -58,28 +51,37 @@ if (empty($rooms)) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rooms</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/main.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/picocss/pico.min.css">
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const searchInput = document.getElementById('search');
+            const searchForm = document.querySelector('form');
+
+            searchInput.addEventListener('input', () => {
+                searchForm.submit();
+            });
+        });
+    </script>
 </head>
 <body>
 
 <?php include 'header.php'; ?>  
 <?php include 'hero.php'; ?>
 
-<div class="container mt-5">
+<main class="container">
     <h2>Room Browsing</h2>
-    <form method="get" class="mt-4">
-        <div class="mb-3">
-            <label for="search" class="form-label">Search</label>
-            <input type="text" class="form-control" name="search" id="search" value="<?= htmlspecialchars($search) ?>">
-        </div>
-        <button type="submit" class="btn btn-primary">Search</button>
+    <form method="get" class="grid">
+        <label for="search">
+            Search
+            <input type="text" name="search" id="search" value="<?= htmlspecialchars($search) ?>" placeholder="Enter room name">
+        </label>
+        <button type="submit" role="button">Search</button>
     </form>
 
     <?php if (isset($noResults)): ?>
-        <div class="alert alert-warning mt-4"><?= htmlspecialchars($noResults) ?></div>
+        <article class="alert warning"><?= htmlspecialchars($noResults) ?></article>
     <?php else: ?>
-        <table class="table table-striped mt-4">
+        <table>
             <thead>
                 <tr>
                     <th>#</th>
@@ -97,14 +99,12 @@ if (empty($rooms)) {
                         <td><?= htmlspecialchars($room['name']) ?></td>
                         <td><?= htmlspecialchars($room['capacity']) ?></td>
                         <td><?= htmlspecialchars($room['equipment'] ?? 'N/A') ?></td>
-                        <td>
-                            <?= htmlspecialchars($roomAvailability[$room['id']]) ?>
-                        </td>
+                        <td><?= htmlspecialchars($roomAvailability[$room['id']]) ?></td>
                         <td>
                             <?php if ($roomAvailability[$room['id']] == 'Available'): ?>
-                                <a href="book_room.php?room_id=<?= htmlspecialchars($room['id']) ?>" class="btn btn-primary btn-sm">Book</a>
+                                <a href="book_room.php?room_id=<?= htmlspecialchars($room['id']) ?>" role="button">Book</a>
                             <?php else: ?>
-                                <span class="badge bg-secondary">Not Available</span>
+                                <span class="badge secondary">Not Available</span>
                             <?php endif; ?>
                         </td>
                     </tr>
@@ -112,9 +112,9 @@ if (empty($rooms)) {
             </tbody>
         </table>
     <?php endif; ?>
-</div>
+</main>
 
-<?php include 'footer.php'; ?>  <!-- Include footer here -->
+<?php include 'footer.php'; ?>  
 
 </body>
 </html>
