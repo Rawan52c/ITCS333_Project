@@ -15,7 +15,6 @@ if (isset($_GET['room_id'])) {
         die("Room not found.");
     }
 
-
     // Handle form submission for booking
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $startTime = $_POST['start_time'];
@@ -61,41 +60,49 @@ if (isset($_GET['room_id'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book Room</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/main.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@1.5.10/css/pico.min.css"> <!-- Pico.css -->
 </head>
 <body>
 
 <?php include 'header.php'; ?>  <!-- Include the header here -->
 
-<!-- Hero Section -->
-<?php include 'hero.php'; ?>  <!-- Include the hero section -->
-
-<div class="container mt-5">
+<div class="container">
     <h2>Book <?= htmlspecialchars($room['name']) ?></h2>
 
+    <!-- Display error or success messages -->
     <?php if (isset($error)): ?>
-        <div class="alert alert-danger" role="alert">
+        <article class="alert error">
             <?= htmlspecialchars($error) ?>
-        </div>
+        </article>
     <?php elseif (isset($message)): ?>
-        <div class="alert alert-success" role="alert">
+        <article class="alert success">
             <?= htmlspecialchars($message) ?>
-        </div>
+        </article>
     <?php endif; ?>
 
     <form method="post" class="mt-4">
-        <div class="mb-3">
-            <label for="start_time" class="form-label">Start Time</label>
-            <input type="datetime-local" class="form-control" name="start_time" id="start_time" required>
-        </div>
-        <div class="mb-3">
-            <label for="end_time" class="form-label">End Time</label>
-            <input type="datetime-local" class="form-control" name="end_time" id="end_time" required>
-        </div>
-        <button type="submit" class="btn btn-primary">Book Room</button>
+        <label for="start_time">Start Time</label>
+        <input type="datetime-local" name="start_time" id="start_time" required>
+
+        <label for="end_time">End Time</label>
+        <input type="datetime-local" name="end_time" id="end_time" required>
+
+        <button type="submit" class="button">Book Room</button>
     </form>
 </div>
+
+<script>
+    // Add a confirmation prompt before form submission
+    document.querySelector('form').addEventListener('submit', function (e) {
+        const startTime = new Date(document.getElementById('start_time').value);
+        const endTime = new Date(document.getElementById('end_time').value);
+
+        if (startTime >= endTime) {
+            e.preventDefault();
+            alert('End time must be after the start time.');
+        }
+    });
+</script>
 
 <?php include 'footer.php'; ?>  <!-- Include footer here -->
 
