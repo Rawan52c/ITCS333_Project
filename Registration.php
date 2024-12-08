@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Validate email format and domain
     if (!filter_var($email, FILTER_VALIDATE_EMAIL) || !preg_match('/@uob\.edu\.bh$/', $email)) {
-        $error = "Failed to validate your email. Try Again, using your University of Bahrain (UOB) Email Address";
+        $error = "Failed to validate your email. Try again using your University of Bahrain (UOB) Email Address.";
     }
     // Check if passwords match
     elseif ($password !== $pass_confirmation) {
@@ -45,15 +45,38 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/picocss/pico.min.css">
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.querySelector('form');
+            const passwordInput = document.getElementById('password');
+            const passConfirmInput = document.getElementById('pass_confirmation');
+            const emailInput = document.getElementById('email');
+
+            form.addEventListener('submit', (event) => {
+                // Password confirmation validation
+                if (passwordInput.value !== passConfirmInput.value) {
+                    event.preventDefault();
+                    alert('Passwords do not match.');
+                }
+
+                // Email domain validation
+                const emailRegex = /@uob\.edu\.bh$/;
+                if (!emailRegex.test(emailInput.value)) {
+                    event.preventDefault();
+                    alert('Please use a valid UOB email address.');
+                }
+            });
+        });
+    </script>
 </head>
 
 <body>
-    <div class="container">
+    <main class="container">
         <h1><strong>User Registration</strong></h1>
 
         <!-- Display error message if set -->
         <?php if (isset($error)): ?>
-            <div class="alert alert-danger"><?php echo $error; ?></div>
+            <article class="alert error"><?php echo $error; ?></article>
         <?php endif; ?>
 
         <!-- Registration form -->
@@ -88,9 +111,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </select>
             </div>
 
-            <input type="submit" value="Register">
+            <button type="submit" role="button">Register</button>
         </form>
-    </div>
+    </main>
 </body>
 
 </html>
