@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/picocss/pico.min.css">
      <!-- Inline styles for custom page layout -->
     <style>
+         /* Style the profile container */
         .ProfileContainer {
             max-width: 600px;
             margin: 2rem auto;
