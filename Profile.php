@@ -120,6 +120,7 @@
             <img src="<?php echo htmlspecialchars($profileImage); ?>" alt="Profile Image">
         </div>
 
+        <!-- Form for user details and profile image upload -->
         <form method="post" action="" enctype="multipart/form-data">
             <div class="UserDetails">
                 <div>
