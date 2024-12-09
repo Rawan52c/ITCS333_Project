@@ -1,150 +1,332 @@
+
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #f6f4f9;  
-    color: #333333;  
+    background-color: #f9f6fc;
+    color: #4a235a;
     line-height: 1.5;
     padding: 0;
     margin: 0;
-
-    /* Center content */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh; /* Full viewport height */
-    overflow: hidden; /* Prevent scroll if content overflows */
 }
 
 .container {
-    max-width: 400px; /* Prevent container from being too wide */
-    width: 100%; /* Allow flexibility on smaller screens */
-    margin: 0 auto;
+    width: 90%;
+    max-width: 1200px;
+    margin: 20px auto;
     padding: 20px;
-    background-color: #fff; 
-    box-shadow: 0 1px 10px rgba(0, 0, 0, 0.1); 
-    border-radius: 10px; 
-    box-sizing: border-box; /* Ensures padding doesn't overflow */
+    background-color: #ffffff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    box-sizing: border-box;
 }
 
-h1, h2 {
+.text-center {
     text-align: center;
-    color: #000304;
 }
 
-h1 {
-    font-size: 25px;  
+.text-right {
+    text-align: right;
 }
 
-h2 {
-    font-size: 20px;
+.text-left {
+    text-align: left;
+}
+
+.mt-20 {
+    margin-top: 20px;
+}
+
+.mb-20 {
     margin-bottom: 20px;
 }
 
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+    color: #4a235a;
+    margin-bottom: 15px;
+}
+
+h2 {
+    font-size: 24px;
+    text-align: center;
+}
+
+header {
+    text-align: center;
+    background-color: #f4f4f4; /* Light background for the header */
+    padding: 1rem 0;
+    border-bottom: 2px solid #ddd;
+}
+
+
+/* Forms */
+form {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+input[type="text"], input[type="email"], input[type="password"], textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #dcd6f7;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 16px;
+    background-color: #fbf9ff;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+button {
+    cursor: pointer;
+    border-radius: 4px;
+    border:none;
+    padding: 10px 15px;
+    transition: background-color 0.3s;
+    font-size: 16px;
+    margin: 0 10px;
+}
+
+button.primary {
+    background-color: #f4d03f;
+    color: #4a235a;
+}
+
+button.primary:hover {
+    background-color: #dcd6f7;
+}
+
+button.secondary {
+    background-color: #ddd;
+    color: #333;
+}
+
+button.secondary:hover {
+    background-color: #bbb;
+}
+
+.deleteBt{
+    background-color: #4a235a;
+    color: white ;
+}
+
+.deleteBt:hover{
+    background-color: #dcd6f7;
+    color:#4a235a;
+}
+
+.navlist {
+    display: flex;
+    justify-content: center;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    gap: 1rem; /* Space between links */
+}
+
+/* List Item Styles */
+.navlist li {
+    display: inline;
+}
+
+/* Link Styling */
+.navlist a {
+    text-decoration: none;
+    padding: 0.5rem 1rem; /* Space for clickable area */
+    color: #fff; /* White text color */
+    background-color: #4a235a; /* Palm color (purple) */
+    border-radius: 5px; /* Rounded corners */
+    font-weight: bold;
+    transition: background-color 0.3s ease; /* Smooth hover effect */
+}
+
+/* Hover effect for links */
+.navlist a:hover {
+    background-color: #dcd6f7; /* Light lavender on hover */
+}
+
+/* Specific styles for logout button */
+.navlist a.badge.primary {
+    background-color: #f4d03f; /* Yellow background for Logout */
+    color: #4a235a; /* Palm color for text */
+}
+
+/* Hover effect for logout button */
+.navlist a.badge.primary:hover {
+    background-color: #d4ac0d; /* Darker yellow on hover */
+}
+
+/* Navigation Buttons Container */
+.nav-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px; /* Space between buttons */
+}
+
+/* Button Styling */
+.nav-buttons button {
+    padding: 10px 20px;
+    background-color: #f4d03f; /* Yellow background for buttons */
+    border: none;
+    color: black;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px; /* Rounded corners for buttons */
+    font-weight: bold;
+    transition: background-color 0.3s ease; /* Smooth hover effect */
+}
+
+/* Special styling for the Logout button */
+.nav-buttons button:last-child {
+    background-color: #4a235a; /* Palm color for Logout button */
+    color: white;
+}
+
+/* Hover effect for buttons */
+.nav-buttons button:hover {
+    opacity: 0.8; /* Fade effect on hover */
+}
+
+/* Styling for links that aren't part of the nav list (if needed) */
+a {
+    text-decoration: none;
+    color: #4a235a; 
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+.primary{
+    color: #4a235a; 
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: plum;
+ }
+
+a:hover {
+    text-decoration: underline;
+    background-color: #f4d03f;
+}
+.logout{
+    background-color: #4a235a;
+    color: white;
+}
+.delete-room{
+
+}
+
+/* Tables */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+table th, table td {
+    border: 1px solid #dcd6f7; /* Light plum */
+    padding: 10px;
+    text-align: left;
+}
+
+table th {
+    background-color: #f9e7fe; /* Very light plum */
+    color: #4a235a;
+    font-weight: bold;
+}
+
+table tbody tr:nth-child(even) {
+    background-color: #fbf9ff;
+}
+
+/* Alerts */
 .alert {
     padding: 15px;
     margin: 10px 0;
     border-radius: 5px;
-}
-
-.alert-danger {
-    background-color: #168e94;
-    border-color: #141286;
-    color: #d01225;
-}
-
-.alert-success {
-    background-color: #fff;
-    border-color: #000304;
-    color: #e50f24;
-}
-
-form {
     display: flex;
-    flex-direction: column;
-    gap: 20px; /* Spacing between elements */
+    justify-content: space-between;
+    align-items: center;
 }
 
-label {
-    font-size: 18px;
-    color: #334444;
-    font-weight: bold;
+.alert.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
 }
 
-input[type="email"],
-input[type="password"] {
-    padding: 10px;
-    border: 1px solid #1d0c64;
-    border-radius: 4px;
-    font-size: 18px;
-    width: 100%;
-    box-sizing: border-box; /* Fix for input overflow */
+.alert.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
 }
 
-input[type="email"]:focus,
-input[type="password"]:focus {
-    outline: none;
-    border-color: #3b22b8;  
+.alert.info {
+    background-color: #f9e7fe;
+    color: #4a235a;
+    border: 1px solid #e799fd;
 }
 
-button[type="submit"] {
-    padding: 12px;
-    font-size: 18px;
-    background-color: #168e94; /* Distinct background */
-    color: white; /* Contrast text color */
-    cursor: pointer;
+.alert button {
+    background: none;
     border: none;
-    border-radius: 4px;
-    transition: background-color 0.3s ease; /* Smooth hover effect */
+    font-size: 20px;
+    cursor: pointer;
+    color: inherit;
 }
 
-button[type="submit"]:hover {
-    background-color: #0d6d75; /* Slightly darker hover effect */
+/* Badges */
+
+.badge:hover {
+    background-color: #d4ac0d;
 }
 
-.form-footer p {
-    margin: 0;
-    text-align: center;
+.badge {
+    display: inline-block;
+    padding: 5px 10px;
+    font-size: 12px;
+    border-radius: 3px;
+    text-transform: uppercase;
 }
 
-a {
-    color: #1ea2bf; 
-    text-decoration: none;
+.badge.primary {
+    background-color: #4a235a;
+    color: #fff;
 }
 
-a:hover {
-    text-decoration: underline;
+.badge.secondary {
+    background-color: #f4d03f;
+    color: #4a235a;
 }
-
-/* Responsive Styles */
-@media screen and (max-width: 700px) {
+footer{
+    text-align: end left;
+    background-color: gray;
+}
+/* Responsive Design */
+@media screen and (max-width: 768px) {
     .container {
-        width: 90%; 
-    }
-    
-    h1, h2 {
-        font-size: 22px; 
-    }
-    
-    input[type="email"],
-    input[type="password"],
-    button[type="submit"] {
-        font-size: 16px; 
+        width: 100%;
+        padding: 15px;
     }
 
-    .alert {
-        font-size: 16px; 
-    }
-}
-
-@media screen and (min-width: 1200px) {
-    .container {
-        width: 60%; 
+    table {
+        font-size: 14px;
     }
 
-    h1 {
-        font-size: 40px; 
+    button {
+        font-size: 14px;
     }
 
     h2 {
-        font-size: 32px;
+        font-size: 20px;
     }
 }

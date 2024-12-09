@@ -59,7 +59,7 @@ if (isset($_GET['room_id'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book Room</title>
+    <title>Room Booking</title>
     <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@1.5.10/css/pico.min.css"> <!-- Pico.css -->
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -88,7 +88,7 @@ if (isset($_GET['room_id'])) {
         <label for="end_time">End Time</label>
         <input type="datetime-local" name="end_time" id="end_time" required>
 
-        <button type="submit" class="button">Book Room</button>
+        <button type="submit" class="button primary">Book Room</button>
     </form>
 </div>
 

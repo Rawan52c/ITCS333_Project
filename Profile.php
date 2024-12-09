@@ -4,16 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Welcome to UOB IT College Room Booking </title>
-     <!-- Link to Pico CSS for styling -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/picocss/pico.min.css">
-     <!-- Inline styles for custom page layout -->
+    <link rel="stylesheet" href="styles.css">
     <style>
-         /* Style the profile container */
         .ProfileContainer {
             max-width: 600px;
             margin: 2rem auto;
         }
-          /* Style the profile image circle container */
         .ProfileImage {
             width: 100px;
             height: 100px;
@@ -22,7 +19,6 @@
             margin: 1rem auto;
             overflow: hidden;
         }
-         /* Style the image inside the profile container */
         .ProfileImage img {
             width: 100%;
             height: 100%;
@@ -31,8 +27,6 @@
             display: block;
         }
     </style>
-
-    <!-- JavaScript for form validation -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const form = document.querySelector('form');
@@ -40,7 +34,6 @@
             const emailInput = document.querySelector('input[name="email"]');
             const idInput = document.querySelector('input[name="user_id"]');
 
-    // Add an event listener to validate form before submission
             form.addEventListener('submit', (event) => {
                 if (!nameInput.value.trim() || !emailInput.value.trim() || !idInput.value.trim()) {
                     event.preventDefault();
@@ -113,35 +106,47 @@
     }
     
     ?>
-        <!-- Profile container -->
-    <div class="ProfileContainer">
-        <!-- Display the user's profile image -->
-        <div class="ProfileImage">
-            <img src="<?php echo htmlspecialchars($profileImage); ?>" alt="Profile Image">
-        </div>
 
-        <!-- Form for user details and profile image upload -->
-        <form method="post" action="" enctype="multipart/form-data">
-            <div class="UserDetails">
-                <div>
-                    <label for="user_name">User Name</label>
-                    <input type="text" id="user_name" name="user_name" value="<?php echo htmlspecialchars($userName); ?>" required>
-                </div>
-                <div>
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($userEmail); ?>" required>
-                </div>
-                <div>
-                    <label for="user_id">ID</label>
-                    <input type="text" id="user_id" name="user_id" value="<?php echo htmlspecialchars($ID[0]); ?>" readonly>
-                </div>
-                <div>
-                    <label for="profile_image">Profile Image</label>
-                    <input type="file" id="profile_image" name="profile_image" accept="image/*">
-                </div>
-                <button type="submit" name="save">Save</button>
+    <div class="Container">
+        <header class="text-center">
+            <h1> <strong> Welcome to Your Profile </strong></h1>
+            <nav class="navlist">
+                <ul>
+                    <li> <a href = "index.php" class="badge secondary">Home</a></li>
+                    <li> <a href = "rooms.php" class="badge secondary">Rooms</a></li>
+                    <li> <a href="secure_logout.php" role="button" class="badge primary" class="logout">Logout</a> </li>
+                </ul>
+            </nav>
+        </header>
+        <div class="ProfileContainer text-center">
+            <div class="ProfileImage">
+                <img src="<?php echo htmlspecialchars($profileImage); ?>" alt="Profile Image">
             </div>
-        </form>
+
+            <form method="post" action="" enctype="multipart/form-data">
+                <div class="UserDetails">
+                    <div>
+                        <label for="user_name">User Name</label>
+                        <input type="text" id="user_name" name="user_name" value="<?php echo htmlspecialchars($userName); ?>" required>
+                    </div>
+                    <div>
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($userEmail); ?>" required>
+                    </div>
+                    <div>
+                        <label for="user_id">ID</label>
+                        <input type="text" id="user_id" name="user_id" value="<?php echo htmlspecialchars($ID[0]); ?>" readonly>
+                    </div>
+                    <div>
+                        <label for="profile_image">Profile Image</label>
+                        <input type="file" id="profile_image" name="profile_image" accept="image/*">
+                    </div>
+                    <button type="submit" name="save" class="primary">Save</button>
+                </div>
+            </form>
+        </div>
     </div>
+    <?php include 'footer.php'; ?>  <!-- Include footer here -->
+
 </body>
 </html>

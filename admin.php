@@ -83,7 +83,7 @@ $users = fetchAll("SELECT * FROM users");
 <?php include 'header.php'; ?> <!-- Include the header -->
 
 <main class="container">
-    <h1>Admin Panel</h1>
+    <h1 class="text-center">Admin Panel</h1>
 
     <!-- Display messages -->
     <?php if (isset($message)): ?>
@@ -98,7 +98,7 @@ $users = fetchAll("SELECT * FROM users");
 
     <!-- Add Room Form -->
     <section>
-        <h2>Add Room</h2>
+        <h2 class="mt-20">Add Room</h2>
         <form method="post">
             <label for="name">Room Name</label>
             <input type="text" id="name" name="name" placeholder="Enter room name" required>
@@ -112,7 +112,7 @@ $users = fetchAll("SELECT * FROM users");
             <label for="description">Description</label>
             <textarea id="description" name="description" placeholder="Enter room description"></textarea>
 
-            <button type="submit" name="add_room">Add Room</button>
+            <button type="submit" class="deleteBt" name="add_room">Add Room</button>
         </form>
     </section>
 
@@ -123,7 +123,7 @@ $users = fetchAll("SELECT * FROM users");
             <?php foreach ($rooms as $room): ?>
                 <li>
                     <?= htmlspecialchars($room['name']) ?> (Capacity: <?= $room['capacity'] ?>)
-                    <button class="delete-room" data-id="<?= $room['room_id'] ?>">Delete</button>
+                    <button class="deleteBt" data-id="<?= $room['room_id'] ?>">Delete</button>
                 </li>
             <?php endforeach; ?>
         </ul>
@@ -138,7 +138,7 @@ $users = fetchAll("SELECT * FROM users");
                     Room: <?= htmlspecialchars($reservation['room_name']) ?>, User: <?= htmlspecialchars($reservation['user_name']) ?>, 
                     From: <?= htmlspecialchars($reservation['start_time']) ?> to <?= htmlspecialchars($reservation['end_time']) ?>, 
                     Status: <?= htmlspecialchars($reservation['status']) ?>
-                    <button class="delete-reservation" data-id="<?= $reservation['reservation_id'] ?>">Delete</button>
+                    <button class="deleteBt" data-id="<?= $reservation['reservation_id'] ?>">Delete</button>
                 </li>
             <?php endforeach; ?>
         </ul>
@@ -151,14 +151,13 @@ $users = fetchAll("SELECT * FROM users");
             <?php foreach ($users as $user): ?>
                 <li>
                     <?= htmlspecialchars($user['user_name']) ?> (<?= htmlspecialchars($user['email']) ?>)
-                    <button class="delete-user" data-id="<?= $user['id'] ?>">Delete</button>
+                    <button class="deleteBt" data-id="<?= $user['id'] ?>">Delete</button>
                 </li>
             <?php endforeach; ?>
         </ul>
     </section>
 </main>
 
-<?php include 'footer.php'; ?> <!-- Include the footer -->
 
 <script>
     // Add event listeners for delete buttons
@@ -185,6 +184,7 @@ $users = fetchAll("SELECT * FROM users");
         }
     });
 </script>
+<?php include 'footer.php'; ?>
 
 </body>
 </html>

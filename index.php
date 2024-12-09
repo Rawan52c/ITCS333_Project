@@ -45,16 +45,18 @@ $bookedRooms = fetchAll(
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to UOB IT College Room Booking</title>
+    <title>Home - Room Booking</title>
     <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@1.5.10/css/pico.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-    <main class="container">
     <?php include 'header.php'; ?>  <!-- Include the header here -->
     <?php include 'hero.php'; ?>  <!-- Include the hero section -->
-
+    <header class="text-center">
+        <h1>UOB IT College Room Booking</h1>
+    </header>
+    <main class="container">
         <section>
             <h2>Your Booked Rooms</h2>
             <div style="margin-bottom: 1em;">
@@ -119,8 +121,8 @@ $bookedRooms = fetchAll(
                 </table>
             <?php endif; ?>
         </section>
-
-        <?php include 'footer.php'; ?>  <!-- Include footer here -->
     </main>
+    <?php include 'footer.php'; ?>  <!-- Include footer here -->
+
 </body>
 </html>
