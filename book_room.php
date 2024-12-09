@@ -9,7 +9,7 @@ if (isset($_GET['room_id'])) {
     $roomId = $_GET['room_id'];
 
     // Fetch room details
-    $room = fetchOne("SELECT * FROM rooms WHERE id = ?", [$roomId]);
+    $room = fetchOne("SELECT * FROM rooms WHERE room_id = ?", [$roomId]);
 
     if (!$room) {
         die("Room not found.");
@@ -61,6 +61,7 @@ if (isset($_GET['room_id'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book Room</title>
     <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@1.5.10/css/pico.min.css"> <!-- Pico.css -->
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
