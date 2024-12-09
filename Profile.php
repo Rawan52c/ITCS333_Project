@@ -40,6 +40,7 @@
             const emailInput = document.querySelector('input[name="email"]');
             const idInput = document.querySelector('input[name="user_id"]');
 
+    // Add an event listener to validate form before submission
             form.addEventListener('submit', (event) => {
                 if (!nameInput.value.trim() || !emailInput.value.trim() || !idInput.value.trim()) {
                     event.preventDefault();
