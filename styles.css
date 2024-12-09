@@ -1,31 +1,41 @@
 body {
-    font-family: '', sans-serif;
+    font-family: 'Arial', sans-serif;
     background-color: #f6f4f9;  
     color: #333333;  
     line-height: 1.5;
-    padding: 10px;
+    padding: 0;
     margin: 0;
+
+    /* Center content */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full viewport height */
+    overflow: hidden; /* Prevent scroll if content overflows */
 }
 
 .container {
-    max-width: 400px;  
+    max-width: 400px; /* Prevent container from being too wide */
+    width: 100%; /* Allow flexibility on smaller screens */
     margin: 0 auto;
-    padding: 30px;
+    padding: 20px;
     background-color: #fff; 
     box-shadow: 0 1px 10px rgba(0, 0, 0, 0.1); 
     border-radius: 10px; 
+    box-sizing: border-box; /* Ensures padding doesn't overflow */
+}
+
+h1, h2 {
+    text-align: center;
+    color: #000304;
 }
 
 h1 {
-    text-align: center;
-    color: #000304;  
     font-size: 25px;  
 }
 
 h2 {
-    color: #000304;
     font-size: 20px;
-    text-align: center;
     margin-bottom: 20px;
 }
 
@@ -50,13 +60,13 @@ h2 {
 form {
     display: flex;
     flex-direction: column;
-    gap: 10px; 
+    gap: 20px; /* Spacing between elements */
 }
 
 label {
-    font-size: 20px;
+    font-size: 18px;
     color: #334444;
-    font-weight: strong;
+    font-weight: bold;
 }
 
 input[type="email"],
@@ -66,6 +76,7 @@ input[type="password"] {
     border-radius: 4px;
     font-size: 18px;
     width: 100%;
+    box-sizing: border-box; /* Fix for input overflow */
 }
 
 input[type="email"]:focus,
@@ -77,38 +88,50 @@ input[type="password"]:focus {
 button[type="submit"] {
     padding: 12px;
     font-size: 18px;
-    background-color: #fff; 
-    color: white;
+    background-color: #168e94; /* Distinct background */
+    color: white; /* Contrast text color */
     cursor: pointer;
     border: none;
     border-radius: 4px;
+    transition: background-color 0.3s ease; /* Smooth hover effect */
 }
 
 button[type="submit"]:hover {
-    background-color: #ca1010; 
+    background-color: #0d6d75; /* Slightly darker hover effect */
 }
 
-form button {
-    margin-top: 10px;
+.form-footer p {
+    margin: 0;
+    text-align: center;
 }
 
+a {
+    color: #1ea2bf; 
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive Styles */
 @media screen and (max-width: 700px) {
     .container {
         width: 90%; 
     }
     
     h1, h2 {
-        font-size: 25px; 
+        font-size: 22px; 
     }
     
     input[type="email"],
     input[type="password"],
     button[type="submit"] {
-        font-size: 18px; 
+        font-size: 16px; 
     }
 
     .alert {
-        font-size: 18px; 
+        font-size: 16px; 
     }
 }
 
@@ -124,13 +147,4 @@ form button {
     h2 {
         font-size: 32px;
     }
-}
-
-a {
-    color: #1ea2bf; 
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
 }
