@@ -13,6 +13,7 @@
             max-width: 600px;
             margin: 2rem auto;
         }
+          /* Style the profile image circle container */
         .ProfileImage {
             width: 100px;
             height: 100px;
