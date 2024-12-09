@@ -3,7 +3,10 @@ require 'core.php';  // Include core functions
 
 // Ensure the user is logged in and is an admin
 requireLogin();
-if ($_SESSION['role'] !== 'admin') {
+
+$role = $_SESSION['role']; // Get the logged-in user's role
+
+if ($role != 'admin') {
     header("Location: index.php");  // Redirect if the user is not an admin
     exit;
 }
@@ -31,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_room'])) {
 // Handle room deletion
 if (isset($_GET['delete_room'])) {
     $roomId = $_GET['delete_room'];
-    $success = executeQuery("DELETE FROM rooms WHERE id = ?", [$roomId]);
+    $success = executeQuery("DELETE FROM rooms WHERE room_id = ?", [$roomId]);
     if ($success) {
         $message = "Room deleted successfully!";
     } else {
@@ -42,7 +45,7 @@ if (isset($_GET['delete_room'])) {
 // Handle reservation deletion
 if (isset($_GET['delete_reservation'])) {
     $reservationId = $_GET['delete_reservation'];
-    $success = executeQuery("DELETE FROM reservations WHERE id = ?", [$reservationId]);
+    $success = executeQuery("DELETE FROM reservations WHERE reservation_id = ?", [$reservationId]);
     if ($success) {
         $message = "Reservation deleted successfully!";
     } else {
@@ -53,7 +56,7 @@ if (isset($_GET['delete_reservation'])) {
 // Handle user deletion
 if (isset($_GET['delete_user'])) {
     $userId = $_GET['delete_user'];
-    $success = executeQuery("DELETE FROM users WHERE id = ?", [$userId]);
+    $success = executeQuery("DELETE FROM users WHERE user_id = ?", [$userId]);
     if ($success) {
         $message = "User deleted successfully!";
     } else {
@@ -63,7 +66,7 @@ if (isset($_GET['delete_user'])) {
 
 // Fetch rooms, reservations, and users
 $rooms = fetchAll("SELECT * FROM rooms");
-$reservations = fetchAll("SELECT r.name AS room_name, u.name AS user_name, res.start_time, res.end_time, res.status, res.id AS reservation_id FROM reservations res JOIN rooms r ON res.room_id = r.id JOIN users u ON res.user_id = u.id");
+$reservations = fetchAll("SELECT r.name AS room_name, u.user_name AS user_name, res.start_time, res.end_time, res.status, res.reservation_id AS reservation_id FROM reservations res JOIN rooms r ON res.room_id = r.room_id JOIN users u ON res.user_id = u.id");
 $users = fetchAll("SELECT * FROM users");
 ?>
 <!DOCTYPE html>
@@ -73,6 +76,7 @@ $users = fetchAll("SELECT * FROM users");
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Panel</title>
     <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@1.5.10/css/pico.min.css"> <!-- Pico.css CDN -->
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
@@ -119,7 +123,7 @@ $users = fetchAll("SELECT * FROM users");
             <?php foreach ($rooms as $room): ?>
                 <li>
                     <?= htmlspecialchars($room['name']) ?> (Capacity: <?= $room['capacity'] ?>)
-                    <button class="delete-room" data-id="<?= $room['id'] ?>">Delete</button>
+                    <button class="delete-room" data-id="<?= $room['room_id'] ?>">Delete</button>
                 </li>
             <?php endforeach; ?>
         </ul>
@@ -146,7 +150,7 @@ $users = fetchAll("SELECT * FROM users");
         <ul>
             <?php foreach ($users as $user): ?>
                 <li>
-                    <?= htmlspecialchars($user['name']) ?> (<?= htmlspecialchars($user['email']) ?>)
+                    <?= htmlspecialchars($user['user_name']) ?> (<?= htmlspecialchars($user['email']) ?>)
                     <button class="delete-user" data-id="<?= $user['id'] ?>">Delete</button>
                 </li>
             <?php endforeach; ?>
