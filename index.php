@@ -1,30 +1,23 @@
 <?php
-session_start();
-if (!isset($_SESSION['user_id'])) {
-    header("Location: login.php");
-    exit();
-}
 
-$username = $_SESSION['username'];
-$user_position = $_SESSION['user_position'];
-?>
-<?php
-require 'core.php';  // Include the core functions
+require 'core.php';// Include the core functions
 
-requireLogin();  // Ensure the user is logged in
+requireLogin(); // Ensure the user is logged in
 
 $userId = $_SESSION['user_id'];  // Get the logged-in user's ID
+$user_name = $_SESSION['user_name'];
 
 // Handle room deletion
 if (isset($_GET['delete'])) {
     $reservationId = $_GET['delete'];
 
     // Check if the reservation belongs to the logged-in user
-    $reservation = fetchOne("SELECT * FROM reservations WHERE id = ? AND user_id = ?", [$reservationId, $userId]);
+    $reservation = fetchOne("SELECT * FROM reservations WHERE reservation_id = ? AND user_id = ?", [$reservationId, $userId]);
+
 
     if ($reservation) {
         // Delete the reservation
-        $success = executeQuery("DELETE FROM reservations WHERE id = ?", [$reservationId]);
+        $success = executeQuery("DELETE FROM reservations WHERE reservation_id = ?", [$reservationId]);
 
         if ($success) {
             $message = "Room reservation deleted successfully!";
@@ -38,12 +31,13 @@ if (isset($_GET['delete'])) {
 
 // Fetch the user's reservations from the database
 $bookedRooms = fetchAll(
-    "SELECT r.name AS room_name, r.capacity, r.equipment, res.start_time, res.end_time, res.status, res.id AS reservation_id
+    "SELECT r.name AS room_name, r.capacity, r.equipment, res.start_time, res.end_time, res.status, res.reservation_id AS reservation_id
      FROM reservations res
-     JOIN rooms r ON res.room_id = r.id
+     JOIN rooms r ON res.room_id = r.room_id
      WHERE res.user_id = ?",
     [$userId]
 );
+
 ?>
 
 <!DOCTYPE html>
@@ -53,26 +47,19 @@ $bookedRooms = fetchAll(
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome to UOB IT College Room Booking</title>
     <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@1.5.10/css/pico.min.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+
     <main class="container">
-        <header>
-            <hgroup>
-                <h1>Welcome, <?= htmlspecialchars($username) ?>!</h1>
-                <p>Your role: <?= htmlspecialchars($user_position) ?></p>
-            </hgroup>
-            <nav>
-                <a href="logout.php" role="button">Logout</a>
-            </nav>
-        </header>
-
-        <?php include 'header.php'; ?>  <!-- Include the header here -->
-
-        <!-- Hero Section -->
-        <?php include 'hero.php'; ?>  <!-- Include the hero section -->
+    <?php include 'header.php'; ?>  <!-- Include the header here -->
+    <?php include 'hero.php'; ?>  <!-- Include the hero section -->
 
         <section>
             <h2>Your Booked Rooms</h2>
+            <div style="margin-bottom: 1em;">
+                <a href="book_room.php" role="button" class="primary">Book a Room</a>
+            </div>
 
             <?php if (isset($error)): ?>
                 <article class="alert error">
@@ -117,21 +104,23 @@ $bookedRooms = fetchAll(
                                     </span>
                                 </td>
                                 <td>
-                                    <a href="index.php?delete=<?= htmlspecialchars($room['reservation_id']) ?>" 
-                                       role="button" 
-                                       class="contrast"
-                                       onclick="return confirm('Are you sure you want to delete this reservation?');">
-                                       Delete
+                                <a href="index.php?delete=<?= htmlspecialchars($room['reservation_id']) ?>" 
+                                    role="button" 
+                                    class="contrast"
+                                    onclick="return confirm('Are you sure you want to delete this reservation?');">
+                                    Delete
                                     </a>
+
                                 </td>
                             </tr>
+                            
                         <?php endforeach; ?>
                     </tbody>
                 </table>
             <?php endif; ?>
         </section>
 
-        <?php include 'footer.php'; ?>  <!-- Include footer here -->
+        <?php include 'footer.php'; ?>  <!-- Includes Footer here -->
     </main>
 </body>
 </html>
