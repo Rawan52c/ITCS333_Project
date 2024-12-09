@@ -8,6 +8,7 @@ session_unset();
 // Destroy the session
 session_destroy();
 
+// Optional: Set a message for successful logout
 $message = "You have successfully logged out.";
 ?>
 
