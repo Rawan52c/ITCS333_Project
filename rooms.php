@@ -15,11 +15,11 @@ $roomAvailability = [];
 foreach ($rooms as $room) {
     $reservations = fetchAll(
         "SELECT * FROM reservations WHERE room_id = ? AND status = 'confirmed' ORDER BY start_time",
-        [$room['id']]
+        [$room['room_id']]
     );
 
     if (empty($reservations)) {
-        $roomAvailability[$room['id']] = 'Available';
+        $roomAvailability[$room['room_id']] = 'Available';
     } else {
         $nextAvailable = null;
         $now = new DateTime();
@@ -33,9 +33,9 @@ foreach ($rooms as $room) {
         }
 
         if (!$nextAvailable) {
-            $roomAvailability[$room['id']] = 'Available';
+            $roomAvailability[$room['room_id']] = 'Available';
         } else {
-            $roomAvailability[$room['id']] = "Next available: " . $nextAvailable;
+            $roomAvailability[$room['room_id']] = "Next available: " . $nextAvailable;
         }
     }
 }
@@ -52,13 +52,16 @@ if (empty($rooms)) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rooms</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/picocss/pico.min.css">
+    <link rel="stylesheet" href="styles.css">
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const searchInput = document.getElementById('search');
             const searchForm = document.querySelector('form');
-
+            let timeout;
             searchInput.addEventListener('input', () => {
-                searchForm.submit();
+                clearTimeout(timeout);
+                timeout = setTimeout(() => {
+                searchForm.submit();}, 2500);
             });
         });
     </script>
@@ -99,10 +102,10 @@ if (empty($rooms)) {
                         <td><?= htmlspecialchars($room['name']) ?></td>
                         <td><?= htmlspecialchars($room['capacity']) ?></td>
                         <td><?= htmlspecialchars($room['equipment'] ?? 'N/A') ?></td>
-                        <td><?= htmlspecialchars($roomAvailability[$room['id']]) ?></td>
+                        <td><?= htmlspecialchars($roomAvailability[$room['room_id']]) ?></td>
                         <td>
-                            <?php if ($roomAvailability[$room['id']] == 'Available'): ?>
-                                <a href="book_room.php?room_id=<?= htmlspecialchars($room['id']) ?>" role="button">Book</a>
+                            <?php if ($roomAvailability[$room['room_id']] == 'Available'): ?>
+                                <a href="book_room.php?room_id=<?= htmlspecialchars($room['room_id']) ?>" role="button">Book</a>
                             <?php else: ?>
                                 <span class="badge secondary">Not Available</span>
                             <?php endif; ?>
