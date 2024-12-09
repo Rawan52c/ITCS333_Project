@@ -22,6 +22,7 @@
             margin: 1rem auto;
             overflow: hidden;
         }
+         /* Style the image inside the profile container */
         .ProfileImage img {
             width: 100%;
             height: 100%;
