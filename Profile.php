@@ -6,6 +6,7 @@
     <title> Welcome to UOB IT College Room Booking </title>
      <!-- Link to Pico CSS for styling -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/picocss/pico.min.css">
+     <!-- Inline styles for custom page layout -->
     <style>
         .ProfileContainer {
             max-width: 600px;
