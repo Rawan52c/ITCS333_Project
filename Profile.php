@@ -31,6 +31,8 @@
             display: block;
         }
     </style>
+
+    <!-- JavaScript for form validation -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const form = document.querySelector('form');
