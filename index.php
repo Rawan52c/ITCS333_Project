@@ -58,7 +58,7 @@ $bookedRooms = fetchAll(
         <section>
             <h2>Your Booked Rooms</h2>
             <div style="margin-bottom: 1em;">
-                <a href="book_room.php" role="button" class="primary">Book a Room</a>
+                <a href="rooms.php" role="button" class="primary">Book a Room</a>
             </div>
 
             <?php if (isset($error)): ?>
@@ -120,7 +120,7 @@ $bookedRooms = fetchAll(
             <?php endif; ?>
         </section>
 
-        <?php include 'footer.php'; ?>  <!-- Includes Footer here -->
+        <?php include 'footer.php'; ?>  <!-- Include footer here -->
     </main>
 </body>
 </html>
