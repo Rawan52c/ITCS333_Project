@@ -113,7 +113,7 @@
     }
     
     ?>
-
+    <!-- Profile container -->
     <div class="ProfileContainer">
         <div class="ProfileImage">
             <img src="<?php echo htmlspecialchars($profileImage); ?>" alt="Profile Image">
