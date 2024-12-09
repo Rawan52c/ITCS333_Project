@@ -35,3 +35,4 @@ $message = "You have successfully logged out.";
 header("Refresh: 2; url=login.php");
 exit();
 ?>
+
