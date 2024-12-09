@@ -113,8 +113,9 @@
     }
     
     ?>
-    <!-- Profile container -->
+        <!-- Profile container -->
     <div class="ProfileContainer">
+        <!-- Display the user's profile image -->
         <div class="ProfileImage">
             <img src="<?php echo htmlspecialchars($profileImage); ?>" alt="Profile Image">
         </div>
