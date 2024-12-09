@@ -18,27 +18,32 @@ foreach ($rooms as $room) {
         [$room['room_id']]
     );
 
-    if (empty($reservations)) {
-        $roomAvailability[$room['room_id']] = 'Available';
-    } else {
-        $nextAvailable = null;
-        $now = new DateTime();
+    $now = new DateTime();
+    $isAvailable = true;
+    $nextAvailable = null;
 
-        foreach ($reservations as $reservation) {
-            $endTime = new DateTime($reservation['end_time']);
-            if ($endTime > $now) {
-                $nextAvailable = $endTime->format('Y-m-d H:i');
-                break;
-            }
+    foreach ($reservations as $reservation) {
+        $startTime = new DateTime($reservation['start_time']);
+        $endTime = new DateTime($reservation['end_time']);
+
+        if ($now >= $startTime && $now <= $endTime){
+            $isAvailable = false;
+            $nextAvailable = $endTime->format('Y-m-d H:i');
+            break;
         }
 
-        if (!$nextAvailable) {
-            $roomAvailability[$room['room_id']] = 'Available';
-        } else {
-            $roomAvailability[$room['room_id']] = "Next available: " . $nextAvailable;
+        if($startTime > $now && ($nextAvailable === null || $startTime < new DateTime($nextAvailable))){
+            $nextAvailable = $startTime->format('Y-m-d H:i');
         }
     }
+
+    if ($isAvailable) {
+        $roomAvailability[$room['room_id']] = 'Available';
+    } else {
+        $roomAvailability[$room['room_id']] = 'Next Available' . $nextAvailable;
+    }
 }
+
 
 if (empty($rooms)) {
     $noResults = "No rooms found.";
@@ -68,56 +73,57 @@ if (empty($rooms)) {
 </head>
 <body>
 
-<?php include 'header.php'; ?>  
-<?php include 'hero.php'; ?>
+    <?php include 'header.php'; ?>  
 
-<main class="container">
-    <h2>Room Browsing</h2>
-    <form method="get" class="grid">
-        <label for="search">
-            Search
-            <input type="text" name="search" id="search" value="<?= htmlspecialchars($search) ?>" placeholder="Enter room name">
-        </label>
-        <button type="submit" role="button">Search</button>
-    </form>
+    <main class="container">
+        
+        <h2>Room Browsing</h2>
+        <form method="get" class="grid">
+            <label for="search">
+                Search
+                <input type="text" name="search" id="search" value="<?= htmlspecialchars($search) ?>" placeholder="Enter room name">
+            </label>
+            <button type="submit" role="button" class="primary">Search</button>
+        </form>
 
-    <?php if (isset($noResults)): ?>
-        <article class="alert warning"><?= htmlspecialchars($noResults) ?></article>
-    <?php else: ?>
-        <table>
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Name</th>
-                    <th>Capacity</th>
-                    <th>Equipment</th>
-                    <th>Status</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($rooms as $index => $room): ?>
+        <?php if (isset($noResults)): ?>
+            <article class="alert warning"><?= htmlspecialchars($noResults) ?></article>
+        <?php else: ?>
+            <table>
+                <thead>
                     <tr>
-                        <td><?= $index + 1 ?></td>
-                        <td><?= htmlspecialchars($room['name']) ?></td>
-                        <td><?= htmlspecialchars($room['capacity']) ?></td>
-                        <td><?= htmlspecialchars($room['equipment'] ?? 'N/A') ?></td>
-                        <td><?= htmlspecialchars($roomAvailability[$room['room_id']]) ?></td>
-                        <td>
-                            <?php if ($roomAvailability[$room['room_id']] == 'Available'): ?>
-                                <a href="book_room.php?room_id=<?= htmlspecialchars($room['room_id']) ?>" role="button">Book</a>
-                            <?php else: ?>
-                                <span class="badge secondary">Not Available</span>
-                            <?php endif; ?>
-                        </td>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Capacity</th>
+                        <th>Equipment</th>
+                        <th>Status</th>
                     </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-    <?php endif; ?>
-</main>
+                </thead>
+                <tbody>
+                    <?php foreach ($rooms as $index => $room): ?>
+                        <tr>
+                            <td><?= $index + 1 ?></td>
+                            <td><?= htmlspecialchars($room['name']) ?></td>
+                            <td><?= htmlspecialchars($room['capacity']) ?></td>
+                            <td><?= htmlspecialchars($room['equipment'] ?? 'N/A') ?></td>
+                            <td>
+                                <?php if ($roomAvailability[$room['room_id']] == 'Available'): ?>
+                                    <a href="book_room.php?room_id=<?= htmlspecialchars($room['room_id']) ?>" role="button">Book</a>
+                                <?php elseif (is_array($roomAvailability[$room['room_id']])): ?>
+                                    <span><?= htmlspecialchars($roomAvailability[$room['room_id']]['status']) ?> (Next available: <?= htmlspecialchars($roomAvailability[$room['room_id']]['next_time']) ?>)</span>
+                                    <a href="book_room.php?room_id=<?= htmlspecialchars($room['room_id']) ?>&next_time=<?= urlencode($roomAvailability[$room['room_id']]['next_time']) ?>" role="button">Book Next Available Time</a>
+                                <?php else: ?>    
+                                    <span class="badge secondary">Not Available</span>
+                                <?php endif; ?>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        <?php endif; ?>
+    </main>
 
-<?php include 'footer.php'; ?>  
+    <?php include 'footer.php'; ?>  
 
 </body>
 </html>
