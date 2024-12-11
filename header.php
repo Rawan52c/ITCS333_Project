@@ -5,6 +5,11 @@
             <li> <a href = "index.php" class="badge secondary">Home</a></li>
             <li> <a href = "profile.php" class="badge secondary">Profile</a></li>
             <li> <a href = "rooms.php" class="badge secondary">Rooms</a></li>
+
+            <?php 
+            if (isset($_SESSION['role']) && $_SESSION['role'] =='admin') {
+                echo '<li><a href="admin.php" class="badge secondary">Admin</a></li>'; }   
+            ?>            
             <li> <a href="secure_logout.php" role="button" class="badge primary" class="logout">Logout</a> </li>
         </ul>
     </nav>
