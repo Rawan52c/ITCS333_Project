@@ -120,7 +120,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <!-- Additional Links -->
         <div class="form-footer">
             <p>
-                <span id="toggleRecoveryForm" class="toggle-link">Forgot your password?</span>
+                <span id="toggleRecoveryForm" class="toggle-link" style="cursor: pointer">Forgot your password?</span>
             </p>
             <p>
                 New user? <a href="registration.php">Register here</a>.

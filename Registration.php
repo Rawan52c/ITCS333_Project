@@ -72,8 +72,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <body>
     <main class="container">
-    <?php include 'header.php'; ?>
-        <h1><strong>User Registration</strong></h1>
+    <header class="text-center">
+        <h1> <strong>User Registration</strong></h1>
+        <nav class="navlist">
+            <ul>
+                <li> <a href = "login.php" class="badge secondary">Go Back</a></li>
+            </ul>
+        </nav>
+    </header>
 
         <!-- Display error message if set -->
         <?php if (isset($error)): ?>
